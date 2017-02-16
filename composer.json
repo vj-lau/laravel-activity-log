@@ -1,0 +1,41 @@
+{
+  "name": "vjlau/laravel-action-log",
+  "description": "Laravel Action Log",
+  "keywords": [
+    "laravel",
+    "action log",
+    "request log",
+    "query log",
+    "api log"
+  ],
+  "authors": [
+    {
+      "name": "vjlau",
+      "email": "vjlau.dev@gmail.com",
+      "homepage": "http://vjlau.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/support": "5.3.x|5.4.x",
+    "laravel/framework": "5.3.*",
+    "ramsey/uuid": "^3.5",
+    "jenssegers/mongodb": "^3.1"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1-dev"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "VJLau\\ActivityLog\\": "src/"
+    }
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  }
+}

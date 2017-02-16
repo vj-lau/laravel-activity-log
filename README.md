@@ -1,2 +1,2 @@
-# laravel-action-log
-laravel操作日志
+# laravel-activity-log
+Laravel操作日志
