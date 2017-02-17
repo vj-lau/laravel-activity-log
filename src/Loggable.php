@@ -3,7 +3,6 @@
 namespace Marquine\ActivityLog;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Utils\CommonUtils;
 
 trait Loggable
 {

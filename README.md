@@ -2,7 +2,7 @@
 Laravel操作日志
 
 ```shell
-composer require vjlau/laravel-action-log
+composer require vjlau/laravel-activity-log
 ```
 
 
