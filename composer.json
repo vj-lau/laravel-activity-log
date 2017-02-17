@@ -1,12 +1,12 @@
 {
-  "name": "vjlau/laravel-action-log",
-  "description": "Laravel Action Log",
+  "name": "vjlau/laravel-activity-log",
+  "description": "Laravel Activity Log",
   "keywords": [
-    "laravel",
-    "action log",
-    "request log",
-    "query log",
-    "api log"
+    "Laravel",
+    "Activity Log",
+    "Request Log",
+    "Query Log",
+    "Api Log"
   ],
   "authors": [
     {
