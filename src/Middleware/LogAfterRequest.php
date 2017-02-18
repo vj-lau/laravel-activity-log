@@ -42,10 +42,13 @@ class LogAfterRequest
         $end = microtime(true);
 
         $log = new RequestLog;
-        $log->params = $request->all();
         $log->request_id = $request->headers->get('X-Request-ID');
-        $log->duration = number_format(($end - $start) * 1000, 3);
-        $log->fullUrl = $request->fullUrl();  // milliseconds
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        $log->user_truename = auth()->user()->truename;
+        $log->params = $request->all();
+        $log->fullUrl = $request->fullUrl();
+        $log->duration = number_format(($end - $start) * 1000, 3); // milliseconds
         $log->method = $request->method();
         $log->ip = $request->ip();
         $log->status_code = $response->getStatusCode();

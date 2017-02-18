@@ -4,6 +4,7 @@ namespace VJLau\ActivityLog;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use VJLau\ActivityLog\Models\ActivityLog;
+use Illuminate\Support\Facades\Log;
 
 trait Loggable
 {
@@ -113,15 +114,12 @@ trait Loggable
         }
 
         $request = request();
-
         $log = new ActivityLog;
-        $log->user_id = auth()->user()->id;
-        $log->user_name = auth()->user()->name;
-        $log->user_truename = auth()->user()->truename;
         $log->request_id = $request->headers->get('X-Request-ID');
         $log->event = $event;
         $log->before = $before;
         $log->after = $after;
+        $log->model = get_class($this);
         $log->save();
     }
 
