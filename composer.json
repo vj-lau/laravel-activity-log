@@ -8,6 +8,7 @@
     "Query Log",
     "Api Log"
   ],
+  "minimum-stability": "dev",
   "homepage": "https://github.com/vj-lau/laravel-activity-log",
   "license": "MIT",
   "authors": [
@@ -32,17 +33,6 @@
   "autoload": {
     "psr-4": {
       "VJLau\\ActivityLog\\": "src/"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "0.1-dev"
-    }
-  },
-  "repositories": {
-    "packagist": {
-      "type": "composer",
-      "url": "https://packagist.phpcomposer.com"
     }
   }
 }
