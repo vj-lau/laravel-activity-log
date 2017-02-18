@@ -8,7 +8,6 @@
     "Query Log",
     "Api Log"
   ],
-  "minimum-stability": "dev",
   "homepage": "https://github.com/vj-lau/laravel-activity-log",
   "license": "MIT",
   "authors": [
