@@ -1,6 +1,6 @@
 <?php
 
-namespace Marquine\ActivityLog\Diff;
+namespace VJLau\ActivityLog\Diff;
 
 use InvalidArgumentException;
 use cogpowered\FineDiff\Diff as Differ;

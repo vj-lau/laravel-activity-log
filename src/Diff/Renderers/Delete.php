@@ -1,6 +1,6 @@
 <?php
 
-namespace Marquine\ActivityLog\Diff\Renderers;
+namespace VJLau\ActivityLog\Diff\Renderers;
 
 use cogpowered\FineDiff\Render\Renderer;
 

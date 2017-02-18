@@ -12,6 +12,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Log\Writer;
 use Illuminate\Support\ServiceProvider;
+use VJLau\ActivityLog\Models\QueryLog;
 
 /***
  * SQL日志
@@ -56,11 +57,13 @@ class QueryLogServiceProvider extends ServiceProvider
                 foreach ($bindings as $val) {
                     $sql = preg_replace('/\?/', "'{$val}'", $sql, 1);
                 }
-                $request = request();
-                $uuid = $request->headers->get('X-Request-ID');
-                // TODO 保存记录
-//                $log->log($level, $time . '  ' . $sql);
 
+                $request = request();
+                $log = new QueryLog;
+                $log->request_id = $request->headers->get('X-Request-ID');
+                $log->duration = $time; // milliseconds
+                $log->sql = $sql;
+                $log->save();
             } catch (\Exception $e) {
                 //  be quiet on error
             }

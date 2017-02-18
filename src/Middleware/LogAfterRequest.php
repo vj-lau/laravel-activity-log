@@ -10,6 +10,7 @@ namespace VJLau\ActivityLog\Middleware;
 
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
+use VJLau\ActivityLog\Models\RequestLog;
 
 /**
  * Http 请求唯一标识
@@ -19,12 +20,10 @@ use Ramsey\Uuid\Uuid;
  */
 class LogAfterRequest
 {
-    private $start;
-    private $end;
-
     public function handle(Request $request, \Closure $next)
     {
-        $this->start = microtime(true);
+        $start = microtime(true);
+        $request->headers->set('X-Request-Start-Time', $start);
 
         $uuid = $request->headers->get('X-Request-ID');
         if (is_null($uuid)) {
@@ -33,23 +32,23 @@ class LogAfterRequest
         }
 
         $response = $next($request);
-
         $response->headers->set('X-Request-ID', $uuid);
-
         return $response;
     }
 
     public function terminate($request, $response)
     {
-        $this->end = microtime(true);
+        $start = $request->headers->get('X-Request-Start-Time');
+        $end = microtime(true);
 
-        // TODO 保存记录
-//        Log::info('app.requests', ['request' => $request->all(), 'response' => $response]);
-        //        Log::info('ApiLog done===========================');
-//        Log::info('Duration:  ' . number_format($this->end - $this->start, 3));
-//        Log::info('URL: ' . $request->fullUrl());
-//        Log::info('Method: ' . $request->getMethod());
-//        Log::info('IP Address: ' . $request->getClientIp());
-//        Log::info('Status Code: ' . $response->getStatusCode());
+        $log = new RequestLog;
+        $log->params = $request->all();
+        $log->request_id = $request->headers->get('X-Request-ID');
+        $log->duration = number_format(($end - $start) * 1000, 3);
+        $log->fullUrl = $request->fullUrl();  // milliseconds
+        $log->method = $request->method();
+        $log->ip = $request->ip();
+        $log->status_code = $response->getStatusCode();
+        $log->save();
     }
 }

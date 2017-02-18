@@ -7,18 +7,6 @@
  */
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Activity Model
-    |--------------------------------------------------------------------------
-    |
-    | The model for the activities table.
-    | Needs to use the \Marquine\ActivityLog\ActivityLog Trait.
-    */
-
-//    'model' => App\Model\Activity::class,
-
     /*
     |--------------------------------------------------------------------------
     | Activity Diff

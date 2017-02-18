@@ -1,6 +1,6 @@
 <?php
 
-namespace Marquine\ActivityLog;
+namespace VJLau\ActivityLog;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -13,8 +13,9 @@ class ActivityLogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Publish config
         $this->publishes([
-            __DIR__ . '/config/activity.php' => config_path('activity.php')
-        ], 'activity-log');
+            base_path('vendor/vjlau/laravel-activity-log/config/activity-log.php') => config_path('activity-log.php'),
+        ], 'config');
     }
 }

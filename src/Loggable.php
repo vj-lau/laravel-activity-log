@@ -1,8 +1,9 @@
 <?php
 
-namespace Marquine\ActivityLog;
+namespace VJLau\ActivityLog;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use VJLau\ActivityLog\Models\ActivityLog;
 
 trait Loggable
 {
@@ -93,7 +94,7 @@ trait Loggable
     {
         $except = property_exists($this, 'logExcept')
             ? $this->logExcept
-            : config('activity.log.except');
+            : config('activity-log.log.except');
 
         return array_diff_key(
             $this->getAttributes(), array_flip($except)
@@ -111,20 +112,17 @@ trait Loggable
             return;
         }
 
-        $class = config('activity.model');
-        $activity = new $class;
-
-        $activity->user_id = auth()->user()->id;
-        $activity->event = $event;
-        $activity->before = $before;
-        $activity->after = $after;
-
         $request = request();
-        $uuid = $request->headers->get('X-Request-ID');
-//        CommonUtils::vjlog('Loggable');
-//        CommonUtils::vjlog($uuid);
-        // TODO 记录
-//        $this->activities()->save($activity);
+
+        $log = new ActivityLog;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        $log->user_truename = auth()->user()->truename;
+        $log->request_id = $request->headers->get('X-Request-ID');
+        $log->event = $event;
+        $log->before = $before;
+        $log->after = $after;
+        $log->save();
     }
 
     /**
@@ -135,7 +133,7 @@ trait Loggable
     public function diffRaw()
     {
         if (!property_exists($this, 'diffRaw')) {
-            return config('activity.diff.raw');
+            return config('activity-log.diff.raw');
         }
 
         return $this->diffRaw;
@@ -149,7 +147,7 @@ trait Loggable
     public function diffGranularity()
     {
         if (!property_exists($this, 'diffGranularity')) {
-            return config('activity.diff.granularity');
+            return config('activity-log.diff.granularity');
         }
 
         return $this->diffGranularity;
