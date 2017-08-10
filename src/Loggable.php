@@ -102,6 +102,11 @@ trait Loggable
         );
     }
 
+    public function logs()
+    {
+        return $this->morphMany('Bidzm\ActivityLog\Models\ActivityLog', 'loggable');
+    }
+
     /**
      * Save an activity log.
      *
