@@ -6,17 +6,17 @@
  * Time: 下午8:25
  */
 
-namespace VJLau\ActivityLog\Middleware;
+namespace Bidzm\ActivityLog\Middleware;
 
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
-use VJLau\ActivityLog\Models\RequestLog;
+use Bidzm\ActivityLog\Models\RequestLog;
 
 /**
  * Http 请求唯一标识
  *
  * Class RequestId
- * @package VJLau\ActivityLog\Middleware
+ * @package Bidzm\ActivityLog\Middleware
  */
 class LogAfterRequest
 {

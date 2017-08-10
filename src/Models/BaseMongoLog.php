@@ -6,7 +6,7 @@
  * Time: 下午9:09
  */
 
-namespace VJLau\ActivityLog\Models;
+namespace Bidzm\ActivityLog\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model as Moloquent;
 

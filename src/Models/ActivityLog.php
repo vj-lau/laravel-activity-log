@@ -6,7 +6,9 @@
  * Time: 下午9:16
  */
 
-namespace VJLau\ActivityLog\Models;
+namespace Bidzm\ActivityLog\Models;
+
+use Bidzm\ActivityLog\Diff\Diff;
 
 class ActivityLog extends BaseMongoLog
 {

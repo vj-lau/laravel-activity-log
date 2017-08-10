@@ -1,5 +1,5 @@
 {
-  "name": "vjlau/laravel-activity-log",
+  "name": "abidnurulhakim/laravel-activity-log",
   "description": "Laravel Activity Log",
   "keywords": [
     "Laravel",
@@ -8,13 +8,12 @@
     "Query Log",
     "Api Log"
   ],
-  "homepage": "https://github.com/vj-lau/laravel-activity-log",
+  "homepage": "https://github.com/abidnurulhakim/laravel-activity-log",
   "license": "MIT",
   "authors": [
     {
-      "name": "vjlau",
-      "email": "vjlau.dev@gmail.com",
-      "homepage": "http://vjlau.com"
+      "name": "Abid Nurul Hakim",
+      "email": "abidnurulhakim@gmail.com"
     }
   ],
   "require": {
@@ -31,7 +30,7 @@
   },
   "autoload": {
     "psr-4": {
-      "VJLau\\ActivityLog\\": "src/"
+      "Bidzm\\ActivityLog\\": "src/"
     }
   }
 }

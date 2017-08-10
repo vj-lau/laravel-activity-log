@@ -6,19 +6,19 @@
  * Time: 下午9:09
  */
 
-namespace VJLau\ActivityLog;
+namespace Bidzm\ActivityLog;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Log\Writer;
 use Illuminate\Support\ServiceProvider;
-use VJLau\ActivityLog\Models\QueryLog;
+use Bidzm\ActivityLog\Models\QueryLog;
 
 /***
  * SQL日志
  *
  * Class QueryLogServiceProvider
- * @package VJLau\ActivityLog\Middleware\RequestId
+ * @package Bidzm\ActivityLog\Middleware\RequestId
  */
 class QueryLogServiceProvider extends ServiceProvider
 {

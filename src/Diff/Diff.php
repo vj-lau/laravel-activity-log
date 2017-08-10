@@ -1,6 +1,6 @@
 <?php
 
-namespace VJLau\ActivityLog\Diff;
+namespace Bidzm\ActivityLog\Diff;
 
 use InvalidArgumentException;
 use cogpowered\FineDiff\Diff as Differ;
@@ -43,7 +43,7 @@ class Diff
      */
     protected function __construct($activity)
     {
-        $this->model = new $activity->loggable_type;
+        $this->model = new $activity;
 
         $this->before = $this->data($activity->before);
 

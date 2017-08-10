@@ -6,7 +6,7 @@
  * Time: 下午9:18
  */
 
-namespace VJLau\ActivityLog\Models;
+namespace Bidzm\ActivityLog\Models;
 
 class QueryLog extends BaseMongoLog
 {

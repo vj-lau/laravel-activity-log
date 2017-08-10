@@ -1,9 +1,9 @@
 <?php
 
-namespace VJLau\ActivityLog;
+namespace Bidzm\ActivityLog;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use VJLau\ActivityLog\Models\ActivityLog;
+use Bidzm\ActivityLog\Models\ActivityLog;
 use Illuminate\Support\Facades\Log;
 
 trait Loggable

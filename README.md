@@ -32,19 +32,19 @@ And add a new mongodb connection `config/database.php`:
 Add the ActivityLogServiceProvider to the providers array in the `config/app.php` file;
 ```
 Jenssegers\Mongodb\MongodbServiceProvider::class,
-VJLau\ActivityLog\ActivityLogServiceProvider::class,
-VJLau\ActivityLog\QueryLogServiceProvider::class,
+Bidzm\ActivityLog\ActivityLogServiceProvider::class,
+Bidzm\ActivityLog\QueryLogServiceProvider::class,
 ```
 
 ### Step 2: Publish config
 ```
-php artisan vendor:publish --provider="VJLau\ActivityLog\ActivityLogServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Bidzm\ActivityLog\ActivityLogServiceProvider" --tag="config"
 ```
 
 ## Usage
-To subscribe model for activity log just use `VJLau\ActivityLog\Loggable`
+To subscribe model for activity log just use `Bidzm\ActivityLog\Loggable`
 ```
-use VJLau\ActivityLog\Loggable;
+use Bidzm\ActivityLog\Loggable;
 ```
 
 To add usage in your model
@@ -56,7 +56,7 @@ To add middleware in your kernel
 ```
 protected $routeMiddleware = [
     ......
-    'log.request' => \VJLau\ActivityLog\Middleware\LogAfterRequest::class,
+    'log.request' => \Bidzm\ActivityLog\Middleware\LogAfterRequest::class,
 ];
 ```
 

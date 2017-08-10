@@ -1,6 +1,6 @@
 <?php
 
-namespace VJLau\ActivityLog\Diff\Renderers;
+namespace Bidzm\ActivityLog\Diff\Renderers;
 
 use cogpowered\FineDiff\Render\Renderer;
 
