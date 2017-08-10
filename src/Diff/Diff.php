@@ -136,7 +136,7 @@ class Diff
      */
     protected function equal($key)
     {
-        if ($this->before[$key] !== $this->after[$key]) {
+        if ($this->before[$key] != $this->after[$key]) {
             return false;
         }
 
