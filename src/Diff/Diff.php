@@ -43,7 +43,7 @@ class Diff
      */
     protected function __construct($activity)
     {
-        $this->model = new $activity->model;
+        $this->model = new $activity->loggable;
 
         $this->before = $this->data($activity->before);
 

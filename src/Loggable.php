@@ -119,7 +119,7 @@ trait Loggable
         $log->event = $event;
         $log->before = $before;
         $log->after = $after;
-        $log->model = get_class($this);
+        $log->loggable = $this;
         $log->save();
     }
 
