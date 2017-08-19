@@ -13,7 +13,7 @@ class Diff
 
     protected $after = [];
 
-    protected $diff;
+    protected $differ;
 
     protected function __construct($activity)
     {
@@ -62,12 +62,13 @@ class Diff
         foreach ($this->keys() as $key) {
             $result[] = [
                 'key' => $key,
-                'value' => array_get($this->before, $key),
                 'before' => array_get($this->before, $key),
                 'after' => array_get($this->after, $key),
-                'html' => $this->diff->render(
+                'html' => $this->differ->render(
                         array_get($this->before, $key, ''),
                         array_get($this->after, $key, '')),
+                'equal' => array_get($this->before, $key) ==
+                            array_get($this->after, $key),
             ];
         }
 

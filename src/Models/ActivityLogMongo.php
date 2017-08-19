@@ -2,8 +2,8 @@
 
 namespace Bidzm\ActivityLog\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model;
 use Bidzm\ActivityLog\Traits\ActivityLoggableTrait;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class ActivityLogMongo extends Model
 {
