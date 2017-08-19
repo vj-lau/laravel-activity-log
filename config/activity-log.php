@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: VJLau
- * Date: 2017/2/16
- * Time: 下午9:04
- */
 
 return [
     /*
@@ -43,4 +37,15 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Driver
+    |--------------------------------------------------------------------------
+    |
+    | Driver that you will use. support : "mongodb" and "eloquent".
+    | IF use "mongodb", log will store in mongodb and log will instance of
+    | Jenssegers\Mongodb\Eloquent\Model.
+    | If use eloquent, log will instance of Illuminate\Database\Eloquent\Model
+    */
+    'driver' => 'mongodb'
 ];

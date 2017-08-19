@@ -15,7 +15,7 @@ class ActivityLogServiceProvider extends ServiceProvider
     {
         // Publish config
         $this->publishes([
-            base_path('vendor/abidnurulhakim/laravel-activity-log/config/activity-log.php') => config_path('activity-log.php'),
+            base_path('vendor/bidzm/laravel-activity-log/config/activity-log.php') => config_path('activity-log.php'),
         ], 'config');
     }
 }
