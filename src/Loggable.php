@@ -3,8 +3,8 @@
 namespace Bidzm\ActivityLog;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes as SoftDeleteMongo;
 use Bidzm\ActivityLog\Models\ActivityLog;
-use Illuminate\Support\Facades\Log;
 
 trait Loggable
 {
@@ -27,18 +27,14 @@ trait Loggable
             $model->logDeleted();
         });
 
-        if (in_array(SoftDeletes::class, class_uses(static::class))) {
+        if (in_array(SoftDeletes::class, class_uses(static::class)) ||
+            in_array(SoftDeleteMongo::class, class_uses(static::class))) {
             static::restored(function ($model) {
                 $model->logRestored();
             });
         }
     }
 
-    /**
-     * Log attributes for the "created" event.
-     *
-     * @return void
-     */
     protected function logCreated()
     {
         $after = $this->getLoggableAttributes();
@@ -46,11 +42,6 @@ trait Loggable
         $this->log(null, $after, 'created');
     }
 
-    /**
-     * Log attributes for the "updated" event.
-     *
-     * @return void
-     */
     protected function logUpdated()
     {
         $after = $this->getLoggableAttributes();
@@ -62,11 +53,6 @@ trait Loggable
         }
     }
 
-    /**
-     * Log attributes for the "deleted" event.
-     *
-     * @return void
-     */
     protected function logDeleted()
     {
         $before = $this->getLoggableAttributes();
@@ -74,11 +60,6 @@ trait Loggable
         $this->log($before, null, 'deleted');
     }
 
-    /**
-     * Log attributes for the "restored" event.
-     *
-     * @return void
-     */
     protected function logRestored()
     {
         $after = $this->getLoggableAttributes();
@@ -86,11 +67,6 @@ trait Loggable
         $this->log(null, $after, 'restored');
     }
 
-    /**
-     * Get the model's loggable attributes.
-     *
-     * @return array
-     */
     protected function getLoggableAttributes()
     {
         $except = property_exists($this, 'logExcept')
@@ -102,6 +78,11 @@ trait Loggable
         );
     }
 
+    public function logs()
+    {
+        return $this->morphMany('Bidzm\ActivityLog\Models\ActivityLog', 'loggable');
+    }
+
     /**
      * Save an activity log.
      *
@@ -109,25 +90,19 @@ trait Loggable
      */
     public function log($before, $after, $event)
     {
-        if ((empty($before) && empty($after)) || !auth()->check()) {
+        if (empty($before) && empty($after)) {
             return;
         }
 
-        $request = request();
         $log = new ActivityLog;
-        $log->request_id = $request->headers->get('X-Request-ID');
+        $log->actor = auth()->user();
         $log->event = $event;
         $log->before = $before;
         $log->after = $after;
-        $log->model = get_class($this);
+        $log->loggable()->associate($this);
         $log->save();
     }
 
-    /**
-     * Get the diffRaw attribute.
-     *
-     * @return mixed
-     */
     public function diffRaw()
     {
         if (!property_exists($this, 'diffRaw')) {
@@ -137,11 +112,6 @@ trait Loggable
         return $this->diffRaw;
     }
 
-    /**
-     * Get the diffGranularity attribute.
-     *
-     * @return mixed
-     */
     public function diffGranularity()
     {
         if (!property_exists($this, 'diffGranularity')) {
