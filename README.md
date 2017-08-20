@@ -2,13 +2,13 @@
 Laravel Activity Log
 
 ## Installation
-Make sure you have the MongoDB PHP driver installed. You can find installation instructions at 
+Make sure you have the MongoDB PHP driver installed. You can find installation instructions at
 http://php.net/manual/en/mongodb.installation.php
 
 
 Install through Composer
 ```
-composer require vjlau/laravel-activity-log
+composer require bidzm/laravel-activity-log
 ```
 
 ## Configuration
@@ -32,19 +32,18 @@ And add a new mongodb connection `config/database.php`:
 Add the ActivityLogServiceProvider to the providers array in the `config/app.php` file;
 ```
 Jenssegers\Mongodb\MongodbServiceProvider::class,
-VJLau\ActivityLog\ActivityLogServiceProvider::class,
-VJLau\ActivityLog\QueryLogServiceProvider::class,
+Bidzm\ActivityLog\ActivityLogServiceProvider::class,
 ```
 
 ### Step 2: Publish config
 ```
-php artisan vendor:publish --provider="VJLau\ActivityLog\ActivityLogServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Bidzm\ActivityLog\ActivityLogServiceProvider" --tag="config"
 ```
 
 ## Usage
-To subscribe model for activity log just use `VJLau\ActivityLog\Loggable`
+To subscribe model for activity log just use `Bidzm\ActivityLog\Loggable`
 ```
-use VJLau\ActivityLog\Loggable;
+use Bidzm\ActivityLog\Loggable;
 ```
 
 To add usage in your model
@@ -52,16 +51,8 @@ To add usage in your model
 use Loggable;
 ```
 
-To add middleware in your kernel
-```
-protected $routeMiddleware = [
-    ......
-    'log.request' => \VJLau\ActivityLog\Middleware\LogAfterRequest::class,
-];
-```
-
 ## Credits
-https://github.com/leomarquine/activity-log - Activity Log for Laravel Eloquent Models
+https://github.com/vjlau/laravel-activity-log - Activity Log for Laravel
 
 ## License
 MIT - http://opensource.org/licenses/MIT

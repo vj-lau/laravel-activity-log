@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: VJLau
- * Date: 2017/2/16
- * Time: 下午9:04
- */
 
 return [
     /*
@@ -33,6 +27,10 @@ return [
     |
     | Next, you can define the log options. The attributes in the except
     | option will not be logged in the activities of a loggable model.
+    | Driver that you will use. support : "mongodb" and "eloquent".
+    | IF use "mongodb", log will store in mongodb and log will instance of
+    | Jenssegers\Mongodb\Eloquent\Model.
+    | If use eloquent, log will instance of Illuminate\Database\Eloquent\Model
     */
 
     'log' => [
@@ -41,6 +39,6 @@ return [
             'updated_at',
             'deleted_at',
         ],
+        'driver' => 'mongodb',
     ],
-
 ];
