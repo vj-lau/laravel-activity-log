@@ -2,9 +2,10 @@
 
 namespace Bidzm\ActivityLog;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Bidzm\ActivityLog\Models\ActivityLogEloquent;
+use Bidzm\ActivityLog\Models\ActivityLogMongo;
+use Illuminate\Database\Eloquent\SoftDeletes as SoftDeleteEloquent;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes as SoftDeleteMongo;
-use Bidzm\ActivityLog\Models\ActivityLog;
 
 trait Loggable
 {
@@ -27,7 +28,7 @@ trait Loggable
             $model->logDeleted();
         });
 
-        if (in_array(SoftDeletes::class, class_uses(static::class)) ||
+        if (in_array(SoftDeleteEloquent::class, class_uses(static::class)) ||
             in_array(SoftDeleteMongo::class, class_uses(static::class))) {
             static::restored(function ($model) {
                 $model->logRestored();
@@ -80,7 +81,11 @@ trait Loggable
 
     public function logs()
     {
-        return $this->morphMany('Bidzm\ActivityLog\Models\ActivityLog', 'loggable');
+        if ($this->logDriver() == 'mongodb') {
+            return $this->morphMany(ActivityLogMongo::class, 'loggable');
+        } else {
+            return $this->morphMany(ActivityLogEloquent::class, 'loggable');
+        }
     }
 
     /**
@@ -93,8 +98,11 @@ trait Loggable
         if (empty($before) && empty($after)) {
             return;
         }
-
-        $log = new ActivityLog;
+        if ($this->logDriver() == 'mongodb') {
+            $log = new ActivityLogMongo;
+        } else {
+            $log = new ActivityLogEloquent;
+        }
         $log->actor = auth()->user();
         $log->event = $event;
         $log->before = $before;
@@ -119,5 +127,14 @@ trait Loggable
         }
 
         return $this->diffGranularity;
+    }
+
+    private function logDriver()
+    {
+        if (!property_exists($this, 'logDriver')) {
+            return config('activity-log.log.driver');
+        }
+
+        return $this->logDriver;
     }
 }
