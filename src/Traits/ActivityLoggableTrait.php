@@ -6,6 +6,11 @@ use Bidzm\ActivityLog\Diff\Diff;
 
 trait ActivityLoggableTrait
 {
+    public function actor()
+    {
+        return $this->morphTo();
+    }
+
     public function loggable()
     {
         return $this->morphTo();

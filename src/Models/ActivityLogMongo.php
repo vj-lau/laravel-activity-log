@@ -10,4 +10,5 @@ class ActivityLogMongo extends Model
     use ActivityLoggableTrait;
 
     protected $connection = 'mongodb';
+    protected $collection = 'activity_logs';
 }

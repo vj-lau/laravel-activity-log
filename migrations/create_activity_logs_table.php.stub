@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateActivityLogsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        Schema::create('activity_logs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->nullableMorphs('actor');
+            $table->nullableMorphs('loggable');
+            $table->string('event')->nullable();
+            $table->text('before')->nullable();
+            $table->text('after')->nullable();
+            $table->timestamps();
+
+            $table->index(['loggable_id', 'loggable_type', 'created_at']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::drop('activity_logs');
+    }
+}

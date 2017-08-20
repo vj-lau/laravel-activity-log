@@ -11,5 +11,5 @@ class ActivityLogEloquent extends Model
     use ActivityLoggableTrait,
         HybridRelations;
 
-    protected $connection = 'mysql';
+    protected $table = 'activity_logs';
 }
