@@ -103,7 +103,9 @@ trait Loggable
         } else {
             $log = new ActivityLogEloquent;
         }
-        $log->actor()->associate(auth()->user());
+        if (auth()->user()) {
+            $log->actor()->associate(auth()->user());
+        }
         $log->event = $event;
         $log->before = $before;
         $log->after = $after;
